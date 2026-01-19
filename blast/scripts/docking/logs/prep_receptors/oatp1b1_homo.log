@@ -1,0 +1,6 @@
+
+Files written:
+ /Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/oatp1b1_homo.json <-- parameterized receptor
+/Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/oatp1b1_homo.pdbqt <-- static (i.e., rigid) receptor input file
+
+@> 5373 atoms and 1 coordinate set(s) were parsed in 0.03s.

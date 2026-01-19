@@ -1,0 +1,6 @@
+
+Files written:
+ /Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/abcb4_zebrafish.json <-- parameterized receptor
+/Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/abcb4_zebrafish.pdbqt <-- static (i.e., rigid) receptor input file
+
+@> 9906 atoms and 1 coordinate set(s) were parsed in 0.04s.

@@ -1,0 +1,6 @@
+
+Files written:
+ /Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/ace_moule.json <-- parameterized receptor
+/Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/ace_moule.pdbqt <-- static (i.e., rigid) receptor input file
+
+@> 5961 atoms and 1 coordinate set(s) were parsed in 0.02s.

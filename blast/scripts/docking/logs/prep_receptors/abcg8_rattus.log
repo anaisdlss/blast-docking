@@ -1,0 +1,6 @@
+
+Files written:
+ /Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/abcg8_rattus.json <-- parameterized receptor
+/Users/user/Desktop/Projet_long/docking/work/receptors/pdbqt/abcg8_rattus.pdbqt <-- static (i.e., rigid) receptor input file
+
+@> 5502 atoms and 1 coordinate set(s) were parsed in 0.02s.
