@@ -1,0 +1,12 @@
+name: blast_docking
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - blast
+  - pandas
+  - requests
+  - openpyxl
+  - certifi
+  - biopython
