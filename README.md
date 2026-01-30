@@ -1,8 +1,13 @@
-## BLAST : Recherches des proteines membranaires homologues
+# BLAST & Docking — Cyanopeptides × Protéines membranaires
 
+Pipeline bioinformatique pour
+(i) l’identification de protéines membranaires homologues par BLAST
+(ii) l’étude de leurs interactions avec des cyanopeptides par docking moléculaire (AutoDock Vina).
+
+## BLAST — Recherche de protéines membranaires homologues
 ---
 
-### Étape 1 — Dézipper les protéomes
+### Étape 1 — Décompresser les protéomes
 
 Dézipper les fichiers sont compressés (.zip) dans le dossier `blast/proteomes`.
 
@@ -10,14 +15,13 @@ Dézipper les fichiers sont compressés (.zip) dans le dossier `blast/proteomes`
 
 ### Étape 2 — Installer l’environnement Conda
 
-#### 1) Créer et activer l’environnement
 Dans le terminal, placez-vous à la racine du projet (là où se trouve `environment.yml`) puis :
 
 ```bash
 conda env create -f environment.yml
 conda activate blast_docking
 ```
-#### 2) Vérifier que BLAST est bien installé
+Vérifier que BLAST est bien installé : 
 
 ```bash
 makeblastdb --version
@@ -25,42 +29,94 @@ blastp -version
 ```
 ---
 
-### Etape 3 - Lancer le blast
+### Étape 3 — Lancer le BLAST local
 
 ```bash
 python blast_local/scripts/blast_final.py
 ```
-Les résultats sont générés automatiquement dans le dossier `resultats/`
+Les résultats sont générés automatiquement dans le dossier `blast/resultats/`
 
----
+Un fichier Excel récapitulatif est ensuite créé, regroupant
+17 protéines sélectionnées communes aux 5 organismes étudiés :`./docking/proteins/new/1_proteine_test.xlsx`.
 
-Nous pouvons ainsi créer un nouveau fichier excel qui regroupe 17 proteines selectionnées communes aux 5 organismes. Ce fichier `1_proteine_test.xlsx` se retrouve dans `./docking/proteins/new/`.
+## DOCKING moléculaire
 
-## DOCKING
+### 1) Génération des structures PDB (AlphaFold)
 
-### 1) Création des fichiers PDB
-
-Nous allons dans un premier temps créer les fichiers PDB de nos proteines selectionnées dans le dossier `./docking/proteins/new`.
+Téléchargement automatique des structures AlphaFold des protéines sélectionnées :
 
 ```bash
 python docking/scripts/0_import_pdb.py
 ```
+Les fichiers PDB sont générés dans : `./docking/proteins/new/`
 
-### 2) Docking proteines-ligands connu
+### 2) Docking protéines–ligands connus (jeu de référence)
 
-Nous faisons ensuite un docking sur les complexes proteines-cyanopeptides connus de par la litterature, ceux utilisé pour faire un BLAST.
+Docking de complexes protéines–cyanopeptides décrits dans la littérature, utilisés comme référence.
 
-Ce script prépare les proteines en noettoyant les PDB (suppression de l'eau, ions, ligands, glycans...), les converti en PDBQT, puis prepare les ligands en generant des strcutures 3D, puis convertit en PDBQT. Le docking se fait avec AutoDock Vina avec les paramètres suivants : blind docking centré sur la proteine, taille de la boite 24x24x24 Å pour les enzymes, et 30x30x30 Å pour les transporteurs. Les paramètres sont : exhaustiveness = 16, num_modes = 50.
-Les resultats sont dans `docking/results/`.
+Le script :
+	•	nettoie les protéines (suppression eau, ions, ligands, glycans),
+	•	convertit protéines et ligands en PDBQT,
+	•	génère des structures 3D des ligands,
+	•	lance AutoDock Vina.
+
+Paramètres de docking :
+	•	Blind docking centré sur la protéine
+	•	Taille de boîte :
+	•	24 × 24 × 24 Å (enzymes)
+	•	30 × 30 × 30 Å (transporteurs)
+	•	exhaustiveness = 16
+	•	num_modes = 50
 
 ```bash
 python docking/scripts/run_known.py
 ```
+Les resultats sont dans `docking/results/`
+
 
 ### 3) Docking rapide
 
-Docking rapide des proteines selectionnées issus du blast avec les cyanopeptides partenaires.
-Les paramètres sont de : 
+Docking rapide des protéines issues du BLAST avec les cyanopeptides étudiés.
+
+Objectif :
+	•	criblage large,
+	•	identification des interactions potentielles,
+	•	sélection des complexes à affiner.
+
+```bash
+python docking/scripts/2_run_fast.py
+```
+
+### 4) Docking affiné
+
+Les meilleurs complexes issus du docking rapide sont redockés avec des critères plus stricts
+(affinité, RMSD, type de protéine).
+
+```bash
+python docking/scripts/3_run_refine.py
+```
+Les résultats finaux sont synthétisés dans des fichiers CSV : 
+`results/summary_fast.csv`
+`results/summary_refine_all.csv`
+`results/summary_refine_filtered.csv`
+
+### 5) Analyse des interactions et des poches
+
+Calcul :
+	•	propriétés des ligands (RDKit),
+	•	composition des poches de liaison,
+	•	liaisons hydrogène (PLIP).
+
+```bash
+python docking/scripts/4_ajout_colonne.py
+```
+
+### 6) Analyses statistiques et visualisation
+Analyses exploratoires, statistiques et PCA :
+```bash
+docking/scripts/5_analyses.ipynb
+```
+
 
 
 
