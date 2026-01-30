@@ -4,9 +4,23 @@ channels:
   - bioconda
 dependencies:
   - python=3.11
+
+  # --- Bioinformatique / BLAST ---
   - blast
+  - biopython
+
+  # --- Manipulation de données ---
   - pandas
   - requests
   - openpyxl
   - certifi
-  - biopython
+  - numpy
+
+  # --- Docking moléculaire ---
+  - autodock-vina
+  - meeko
+  - rdkit
+  - openbabel
+
+  # --- Visualisation (optionnel mais recommandé) ---
+  - pymol-open-source
