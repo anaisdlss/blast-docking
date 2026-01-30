@@ -42,6 +42,26 @@ Nous pouvons ainsi créer un nouveau fichier excel qui regroupe 17 proteines sel
 
 Nous allons dans un premier temps créer les fichiers PDB de nos proteines selectionnées dans le dossier `./docking/proteins/new`.
 
+```bash
+python docking/scripts/0_import_pdb.py
+```
+
+### 2) Docking proteines-ligands connu
+
+Nous faisons ensuite un docking sur les complexes proteines-cyanopeptides connus de par la litterature, ceux utilisé pour faire un BLAST.
+
+Ce script prépare les proteines en noettoyant les PDB (suppression de l'eau, ions, ligands, glycans...), les converti en PDBQT, puis prepare les ligands en generant des strcutures 3D, puis convertit en PDBQT. Le docking se fait avec AutoDock Vina avec les paramètres suivants : blind docking centré sur la proteine, taille de la boite 24x24x24 Å pour les enzymes, et 30x30x30 Å pour les transporteurs. Les paramètres sont : exhaustiveness = 16, num_modes = 50.
+Les resultats sont dans `docking/results/`.
+
+```bash
+python docking/scripts/run_known.py
+```
+
+### 3) Docking rapide
+
+Docking rapide des proteines selectionnées issus du blast avec les cyanopeptides partenaires.
+Les paramètres sont de : 
+
 
 
 
