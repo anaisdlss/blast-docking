@@ -8,3 +8,7 @@ docking/proteins/new/*.pdb
 # Python
 *.pyc
 __pycache__/
+
+# macOS
+.DS_Store
+**/.DS_Store
