@@ -55,18 +55,18 @@ Les fichiers PDB sont générés dans : `./docking/proteins/new/`
 Docking de complexes protéines–cyanopeptides décrits dans la littérature, utilisés comme référence.
 
 Le script :
-	•	nettoie les protéines (suppression eau, ions, ligands, glycans),
-	•	convertit protéines et ligands en PDBQT,
-	•	génère des structures 3D des ligands,
-	•	lance AutoDock Vina.
+- nettoie les protéines (suppression eau, ions, ligands, glycans),
+- convertit protéines et ligands en PDBQT,
+- génère des structures 3D des ligands,
+- lance AutoDock Vina.
 
 Paramètres de docking :
-	•	Blind docking centré sur la protéine
-	•	Taille de boîte :
-	•	24 × 24 × 24 Å (enzymes)
-	•	30 × 30 × 30 Å (transporteurs)
-	•	exhaustiveness = 16
-	•	num_modes = 50
+- Blind docking centré sur la protéine
+- Taille de boîte :
+- 24 × 24 × 24 Å (enzymes)
+- 30 × 30 × 30 Å (transporteurs)
+- exhaustiveness = 16
+- num_modes = 50
 
 ```bash
 python docking/scripts/run_known.py
@@ -79,9 +79,9 @@ Les resultats sont dans `docking/results/`
 Docking rapide des protéines issues du BLAST avec les cyanopeptides étudiés.
 
 Objectif :
-	•	criblage large,
-	•	identification des interactions potentielles,
-	•	sélection des complexes à affiner.
+- criblage large,
+- identification des interactions potentielles,
+- sélection des complexes à affiner.
 
 ```bash
 python docking/scripts/2_run_fast.py
@@ -103,9 +103,9 @@ Les résultats finaux sont synthétisés dans des fichiers CSV :
 ### 5) Analyse des interactions et des poches
 
 Calcul :
-	•	propriétés des ligands (RDKit),
-	•	composition des poches de liaison,
-	•	liaisons hydrogène (PLIP).
+- propriétés des ligands (RDKit),
+- composition des poches de liaison,
+- liaisons hydrogène (PLIP).
 
 ```bash
 python docking/scripts/4_ajout_colonne.py
